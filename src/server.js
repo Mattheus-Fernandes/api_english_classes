@@ -3,8 +3,10 @@ const app = express()
 const router = require("./routes/index")
 const connection = require("./database/index")
 const ClassModel = require("./model/index")
+const cors = require("cors")
 
 //Setting express
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use("/", router)

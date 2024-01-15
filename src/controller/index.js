@@ -17,11 +17,12 @@ async function getAll (req, res) {
 
 async function getStudent (req, res) {
   
-  const { student } = req.params
+  const { id } = req.params
+  const numberId = parseInt(id)
 
   try {
-    if(student != undefined) {
-      const results = await Class.findOne({where: {student}})
+    if(id != undefined) {
+      const results = await Class.findOne({where: {id: numberId}})
       
       if(results){
         res.json(results)
@@ -36,13 +37,13 @@ async function getStudent (req, res) {
 
 async function saveClass(req, res) {
 
-  const {student, hour, language, unit} = req.body
+  const {student, language, unit, date, hour} = req.body
   const unitValue = `Unidade ${unit}`
 
 
   try{
-    if(student !== " " && language !== " " && unit !== " " && hour !== " ") {
-      const results = await Class.create({student, language, unit: unitValue, hour})
+    if(student !== " " && language !== " " && unit !== " " && date !== " " && hour !== " ") {
+      const results = await Class.create({student, language, unit: unitValue, date, hour})
 
       if(results) {
         res.json({message: "Aula registrada com sucesso!"})
@@ -59,14 +60,13 @@ async function editStudent (req, res) {
   
   const { id } = req.params
   const idNumber = parseInt(id)
-  const {student, hour, language, unit} = req.body
-  const unitValue = `Unidade ${unit}`
+  const {student, hour, language, unit, date} = req.body
 
 
   try{
     if(idNumber){
-      if(student !== " " && language !== " " && unit !== " "  && hour !== " ") {
-          const results = await Class.update({student, language, unit: unitValue, hour}, {where: {id}})
+      if(student !== " " && language !== " " && unit !== " " && date !== " "  && hour !== " ") {
+          const results = await Class.update({student, language, unit, date, hour}, {where: {id: idNumber}})
           
 
           if(results == false){

@@ -14,6 +14,10 @@ const Class = connection.connection.define("class", {
     type: Sequelize.STRING,
     allowNull: false
   },
+  date: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   hour: {
     type: Sequelize.STRING,
     allowNull: false
